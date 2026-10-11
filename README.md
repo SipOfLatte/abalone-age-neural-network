@@ -4,7 +4,7 @@ Classifies abalone into four age groups from physical measurements (UCI Abalone
 data) with dense neural networks in scikit-learn, and studies how the number of
 hidden neurons, the learning rate, the number of hidden layers and the optimiser
 (SGD vs Adam) affect performance. The full write-up is in
-[Hao_Sun_Abalone_NN_Report.pdf](Hao_Sun_Abalone_NN_Report.pdf).
+[Abalone_NN_Report.pdf](Abalone_NN_Report.pdf).
 
 ## Files
 
