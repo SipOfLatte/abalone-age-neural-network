@@ -1,0 +1,61 @@
+Data: data/abalone.data  {'raw_rows': 4177, 'missing': 0, 'duplicates': 0, 'bad_height': 4, 'clean_rows': 4173}
+  Class 1 (age <= 7)           189 (4.5%)
+  Class 2 (7 < age <= 10)     1215 (29.1%)
+  Class 3 (10 < age <= 15)    2279 (54.6%)
+  Class 4 (age > 15)           490 (11.7%)
+Train (2503, 10), test (1670, 10); features: ['Length', 'Diameter', 'Height', 'Whole_weight', 'Shucked_weight', 'Viscera_weight', 'Shell_weight', 'Sex_F', 'Sex_I', 'Sex_M']
+
+Convergence trial (1000 epochs, 3 runs each)
+  trial_sgd_1x10_lr0.01      lowest test loss at epoch 1000 (test acc 0.7218); epoch 1000: test acc 0.7218
+  trial_sgd_1x10_lr0.1       lowest test loss at epoch 448 (test acc 0.7178); epoch 1000: test acc 0.7188
+  trial_adam_1x10_lr0.001    lowest test loss at epoch 441 (test acc 0.7246); epoch 1000: test acc 0.7174
+
+Step 2: number of hidden neurons (SGD, one hidden layer)
+  sgd_1x5_lr0.01               train 0.7323 +/- 0.0015   test 0.7144 +/- 0.0040
+  sgd_1x10_lr0.01              train 0.7336 +/- 0.0022   test 0.7186 +/- 0.0040
+  sgd_1x15_lr0.01              train 0.7353 +/- 0.0022   test 0.7197 +/- 0.0022
+  sgd_1x20_lr0.01              train 0.7358 +/- 0.0012   test 0.7210 +/- 0.0020
+  -> optimal hidden neurons: 20
+
+Step 3: learning rate (SGD, one hidden layer of 20)
+  sgd_1x20_lr0.001             train 0.7153 +/- 0.0037   test 0.6995 +/- 0.0059
+  sgd_1x20_lr0.005             train 0.7336 +/- 0.0019   test 0.7167 +/- 0.0019
+  sgd_1x20_lr0.01              train 0.7358 +/- 0.0012   test 0.7210 +/- 0.0020
+  sgd_1x20_lr0.05              train 0.7362 +/- 0.0033   test 0.7197 +/- 0.0041
+  sgd_1x20_lr0.1               train 0.7348 +/- 0.0041   test 0.7128 +/- 0.0069
+  sgd_1x20_lr0.2               train 0.7351 +/- 0.0067   test 0.7068 +/- 0.0085
+  -> optimal learning rate: 0.01
+
+Step 4: two hidden layers (20, 20), SGD lr=0.01
+  sgd_2x20_lr0.01              train 0.7380 +/- 0.0021   test 0.7206 +/- 0.0034
+  -> selected architecture: (20,)
+
+Step 5: Adam vs SGD, hidden layers (20,)
+  sgd_1x20_lr0.01              train 0.7358 +/- 0.0012   test 0.7210 +/- 0.0020
+  adam_1x20_lr0.001            train 0.7402 +/- 0.0017   test 0.7184 +/- 0.0020
+  adam_1x20_lr0.01             train 0.7475 +/- 0.0033   test 0.7128 +/- 0.0052
+  -> selected optimiser: sgd (lr=0.01), layers 20
+
+Step 6: final model (20,), sgd, lr=0.01
+  final_sgd_1x20_lr0.01        train 0.7358 +/- 0.0012   test 0.7210 +/- 0.0020
+  test accuracy (mean of runs): 0.7210 +/- 0.0020
+  confusion matrix (representative run):
+[[ 48  28   0   0]
+ [ 19 315 150   2]
+ [  0 101 773  38]
+ [  0   3 125  68]]
+  AUC Class 1 (age <= 7)         0.9792 +/- 0.0005
+  AUC Class 2 (7 < age <= 10)    0.8811 +/- 0.0013
+  AUC Class 3 (10 < age <= 15)   0.8268 +/- 0.0016
+  AUC Class 4 (age > 15)         0.8749 +/- 0.0023
+                          precision    recall  f1-score   support
+
+      Class 1 (age <= 7)     0.7164    0.6316    0.6713        76
+ Class 2 (7 < age <= 10)     0.7047    0.6481    0.6752       486
+Class 3 (10 < age <= 15)     0.7376    0.8476    0.7888       912
+      Class 4 (age > 15)     0.6296    0.3469    0.4474       196
+
+                accuracy                         0.7210      1670
+               macro avg     0.6971    0.6186    0.6457      1670
+            weighted avg     0.7144    0.7210    0.7103      1670
+
