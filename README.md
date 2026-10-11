@@ -1,7 +1,5 @@
 # Abalone Age Classification with Dense Neural Networks
 
-Hao Sun
-
 Classifies abalone into four age groups from physical measurements (UCI Abalone
 data) with dense neural networks in scikit-learn, and studies how the number of
 hidden neurons, the learning rate, the number of hidden layers and the optimiser
